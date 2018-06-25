@@ -14,7 +14,7 @@ WORKDIR /gentoo
 ARG ARCH=amd64
 ARG MICROARCH=amd64
 ARG SUFFIX
-ARG DIST="https://ftp-osl.osuosl.org/pub/gentoo/releases/${ARCH}/autobuilds"
+ARG DIST
 ARG SIGNING_KEY="0xBB572E0E2D182910"
 
 RUN echo "Building Gentoo Container image for ${ARCH} ${SUFFIX} fetching from ${DIST}" \

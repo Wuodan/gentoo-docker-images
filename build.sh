@@ -27,10 +27,19 @@ else
 	MICROARCH="${ARCH}"
 fi
 
+if [[ "${ARCH}" == "arm" ]]; then
+	MICROARCH="${SUFFIX}"
+	DIST="https://ftp-osl.osuosl.org/pub/gentoo/releases/${ARCH}/autobuilds"
+	ARCH=
+	SUFFIX=
+else
+	DIST="https://ftp-osl.osuosl.org/pub/gentoo/releases/${ARCH}/autobuilds"
+fi
+
 # Prefix the suffix with a hyphen to make sure the URL works
 if [[ -n "${SUFFIX}" ]]; then
 	SUFFIX="-${SUFFIX}"
 fi
 
-docker build --build-arg ARCH="${ARCH}" --build-arg MICROARCH="${MICROARCH}" --build-arg BOOTSTRAP="${BOOTSTRAP}" --build-arg SUFFIX="${SUFFIX}"  -t "${ORG}/${TARGET}:${VERSION}" -f "${NAME}.Dockerfile" .
+docker build --build-arg ARCH="${ARCH}" --build-arg MICROARCH="${MICROARCH}" --build-arg BOOTSTRAP="${BOOTSTRAP}" --build-arg SUFFIX="${SUFFIX}" --build-arg DIST="${DIST}" -t "${ORG}/${TARGET}:${VERSION}" -f "${NAME}.Dockerfile" .
 docker tag "${ORG}/${TARGET}:${VERSION}" "${ORG}/${TARGET}:latest"
