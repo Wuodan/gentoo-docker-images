@@ -29,6 +29,7 @@ fi
 
 if [[ "${ARCH}" == "arm" ]]; then
 	MICROARCH="${SUFFIX}"
+	TARGET="${NAME}-${MICROARCH}"
 	DIST="https://ftp-osl.osuosl.org/pub/gentoo/releases/${ARCH}/autobuilds"
 	ARCH=
 	SUFFIX=
